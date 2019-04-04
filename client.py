@@ -4,10 +4,10 @@ msgFromClient = "HELO"
 
 bytesToSend = str.encode(msgFromClient)
 
-# serverAddressPort = ("192.168.1.100", 20001)
-serverAddressPort = ("127.0.0.1", 20001)
+serverAddressPort = ("192.168.1.102", 20001)
+# serverAddressPort = ("127.0.0.1", 20001)
 
-bufferSize = 1024
+bufferSize = 4096
 
 # Create a UDP socket at client side
 
@@ -19,5 +19,4 @@ UDPClientSocket.sendto(bytesToSend, serverAddressPort)
 
 while True:
     message, _ = UDPClientSocket.recvfrom(bufferSize)
-
     print(message)

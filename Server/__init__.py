@@ -21,7 +21,7 @@ class Server(threading.Thread):
         self.message_loop = MessageLoop(self.socket, self.clients)
 
     def run(self):
-        print(f"Starting server on {self.host}:{self.port}")
+        print("Starting server on {}:{}".format(self.host, self.port))
         self.message_loop.start()
         while self.running:
             try:
