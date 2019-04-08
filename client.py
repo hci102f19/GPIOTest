@@ -20,4 +20,4 @@ while True:
 
     data = json.loads(message.decode('utf-8'))
 
-    print(len(data['access_points']))
+    print("test:" + data)

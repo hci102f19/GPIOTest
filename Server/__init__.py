@@ -31,6 +31,8 @@ class Server(threading.Thread):
 
             if message.decode('utf-8') == 'HELO':
                 if address not in self.clients:
+                    ip, port = address
+                    print("Client connected from: {}:{}".format(ip, port))
                     self.clients.append(address)
             else:
                 self.socket.sendto('InvalidHELOMessage'.encode('utf-8'), address)
