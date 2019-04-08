@@ -11,14 +11,23 @@ class UltrasonicSensor(threading.Thread):
         self.place = place
         self.trigger = trigger
         self.echo = echo
-        self.sensor = DistanceSensor(self.echo, self.trigger)
+        self.sensor = DistanceSensor(self.echo, self.trigger, max_distance=5)
+
+        self.running = True
 
         self.data = 0
 
     def run(self):
-        while True:
+        while self.running:
             self.data = self.sensor.distance * 100
-            sleep(1)
+
+            sleep(0.25)
 
     def emit(self):
-        return self.data
+        return {
+            "place": self.place,
+            "value": self.data
+        }
+
+    def stop(self):
+        self.running = False
