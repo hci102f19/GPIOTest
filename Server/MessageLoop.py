@@ -15,6 +15,7 @@ class MessageLoop(threading.Thread):
 
     def run(self):
         while self.running:
+            print("Sending data to clients")
             if self.emit is not None:
                 data = self.pack(self.emit.emit())
                 if data is not None:
