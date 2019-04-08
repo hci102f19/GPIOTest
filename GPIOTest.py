@@ -1,13 +1,10 @@
-from time import sleep
-
 from GPIO.UltrasonicSensor import UltrasonicSensor
+from Server import Server
 
 us = UltrasonicSensor("TEST", 17, 4)
 us.start()
 
-try:
-    while True:
-        print(us.emit())
-        sleep(0.25)
-except KeyboardInterrupt:
-    us.stop()
+server = Server("0.0.0.0", 20001)
+server.message_loop.emits(us)
+
+server.start()
