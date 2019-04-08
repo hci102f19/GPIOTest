@@ -27,7 +27,7 @@ class UltrasonicSensor(threading.Thread):
     def emit(self):
         return json.dumps({
             "place": self.place,
-            "value": self.data
+            "value": round(self.data, 2)
         })
 
     def stop(self):
