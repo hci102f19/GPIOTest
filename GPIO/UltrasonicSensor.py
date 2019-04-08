@@ -1,3 +1,4 @@
+import json
 import threading
 from time import sleep
 
@@ -24,10 +25,10 @@ class UltrasonicSensor(threading.Thread):
             sleep(0.25)
 
     def emit(self):
-        return {
+        return json.dumps({
             "place": self.place,
             "value": self.data
-        }
+        })
 
     def stop(self):
         self.running = False

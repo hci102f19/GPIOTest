@@ -1,7 +1,6 @@
 import json
 import socket
 
-
 bytesToSend = "HELO".encode('utf-8')
 
 serverAddressPort = ("192.168.1.102", 20001)
@@ -19,5 +18,4 @@ while True:
     message, _ = UDPClientSocket.recvfrom(bufferSize)
 
     data = json.loads(message.decode('utf-8'))
-
-    print("test:" + data)
+    print(data)
