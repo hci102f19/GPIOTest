@@ -1,0 +1,2 @@
+class AddressInUse(Exception):
+    pass

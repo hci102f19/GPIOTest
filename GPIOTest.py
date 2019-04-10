@@ -1,13 +1,18 @@
 from GPIO.Sensors import Sensors
 from Server import Server
+from exceptions.AddressInUse import AddressInUse
 
 us = Sensors()
 us.start()
+try:
+    server = Server("0.0.0.0", 20002)
+    server.message_loop.emits(us)
 
-server = Server("0.0.0.0", 20002)
-server.message_loop.emits(us)
+    server.start()
+except AddressInUse:
+    us.stop()
+    exit(1)
 
-server.start()
 
 try:
     run = True

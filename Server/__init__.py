@@ -1,6 +1,7 @@
 import socket
 import threading
 
+from exceptions.AddressInUse import AddressInUse
 from .MessageLoop import MessageLoop
 
 
@@ -10,7 +11,10 @@ class Server(threading.Thread):
         self.host = host
         self.port = port
         self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-        self.socket.bind((host, port))
+        try:
+            self.socket.bind((host, port))
+        except OSError:
+            raise AddressInUse()
 
         self.buffer_size = 1024
 
