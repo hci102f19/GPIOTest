@@ -18,24 +18,33 @@ class Server(threading.Thread):
 
         self.running = True
 
+        self.HELOMessage = 'HELO'
+
         self.message_loop = MessageLoop(self.socket, self.clients)
 
     def run(self):
         print("Starting server on {}:{}".format(self.host, self.port))
         self.message_loop.start()
+
+        self.socket.settimeout(1.0)
+
         while self.running:
             try:
                 message, address = self.socket.recvfrom(self.buffer_size)
             except ConnectionResetError:
                 continue
+            except socket.timeout:
+                continue
 
-            if message.decode('utf-8') == 'HELO':
+            if message.decode('utf-8') == self.HELOMessage:
                 if address not in self.clients:
                     ip, port = address
                     print("Client connected from: {}:{}".format(ip, port))
                     self.clients.append(address)
+                    self.message_loop.send(self.HELOMessage, address)
             else:
-                self.socket.sendto('InvalidHELOMessage'.encode('utf-8'), address)
+                self.message_loop.send('InvalidHELOMessage', address)
 
     def stop(self):
+        self.message_loop.stop()
         self.running = False

@@ -9,12 +9,19 @@ server.message_loop.emits(us)
 
 server.start()
 
-while True:
-    text = input()
+try:
+    run = True
+    while run:
+        text = input()
 
-    if text == "stop":
-        us.stop()
-        server.stop()
-    if text == "list":
-        for idx, c in enumerate(server.clients):
-            print("{}: {}".format(idx + 1, c))
+        if text == "stop":
+            us.stop()
+            server.stop()
+            run = False
+        if text == "list":
+            for idx, c in enumerate(server.clients):
+                print("{}: {}".format(idx + 1, c))
+except KeyboardInterrupt:
+    us.stop()
+    server.stop()
+    run = False

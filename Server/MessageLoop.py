@@ -19,8 +19,7 @@ class MessageLoop(threading.Thread):
             if self.emit is not None:
                 data = self.pack(self.emit.emit())
                 if data is not None:
-                    for c in self.clients:
-                        self.socket.sendto(data, c)
+                    self.send_all(data)
 
             sleep(1)
 
@@ -33,3 +32,17 @@ class MessageLoop(threading.Thread):
 
     def emits(self, obj: object):
         self.emit = obj
+
+    def send_all(self, msg):
+        for c in self.clients:
+            self.send(msg, c)
+
+    def send(self, msg, recipient):
+        if isinstance(msg, str):
+            msg = msg.encode('utf-8')
+        self.socket.sendto(msg, recipient)
+
+    def stop(self):
+        # self.send_all("Kjærbye has joined Counter-Terrorist")
+        self.send_all("K-BYE")
+        self.running = False
