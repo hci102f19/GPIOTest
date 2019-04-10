@@ -11,4 +11,9 @@ server.start()
 
 while True:
     text = input()
-    print(text)
+
+    if text == "stop":
+        server.stop()
+    if text == "list":
+        for idx, c in enumerate(server.clients):
+            print("{}: {}".format(idx + 1, c))

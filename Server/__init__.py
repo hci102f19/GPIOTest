@@ -36,3 +36,6 @@ class Server(threading.Thread):
                     self.clients.append(address)
             else:
                 self.socket.sendto('InvalidHELOMessage'.encode('utf-8'), address)
+
+    def stop(self):
+        self.running = False
