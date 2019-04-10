@@ -6,7 +6,10 @@ class DummySensor(object):
         return
 
     def data(self):
-        return 0
+        return {
+            'value': 0,
+            'distance': 0
+        }
 
     def stop(self):
         return
