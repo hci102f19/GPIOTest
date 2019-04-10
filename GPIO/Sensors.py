@@ -1,10 +1,14 @@
 import json
+import threading
+from time import sleep
 
 from .UltrasonicSensor import UltrasonicSensor
 
 
-class Sensors(object):
+class Sensors(threading.Thread):
     def __init__(self):
+        super().__init__()
+
         self.sensors = [
             UltrasonicSensor("Front", 0, 2),
             UltrasonicSensor("Right", 3, 4),
@@ -14,5 +18,17 @@ class Sensors(object):
         for sensor in self.sensors:
             sensor.start()
 
+        self.running = True
+
+        self.values = {}
+
+    def run(self):
+        while self.running:
+            self.values = {sensor.place: sensor.data() for sensor in self.sensors}
+            sleep(0.1)
+
     def emit(self):
-        return json.dumps([s.emit() for s in self.sensors])
+        return json.dumps(self.values)
+
+    def stop(self):
+        self.running = False

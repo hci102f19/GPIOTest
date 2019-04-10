@@ -1,7 +1,10 @@
-from GPIO.UltrasonicSensor import UltrasonicSensor
+from GPIO.Sensors import Sensors
 from Server import Server
 
-us = UltrasonicSensor("TEST", 17, 4)
+# us = UltrasonicSensor("TEST", 17, 4)
+# us.start()
+
+us = Sensors()
 us.start()
 
 server = Server("0.0.0.0", 20002)
