@@ -7,3 +7,6 @@ class DummySensor(object):
 
     def data(self):
         return 0
+
+    def stop(self):
+        return

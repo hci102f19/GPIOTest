@@ -33,4 +33,6 @@ class Sensors(threading.Thread):
         return json.dumps(self.values)
 
     def stop(self):
+        for s in self.sensors:
+            s.stop()
         self.running = False
