@@ -30,7 +30,7 @@ class MessageLoop(threading.Thread):
             return data
         return None
 
-    def emits(self, obj: object):
+    def emits(self, obj):
         self.emit = obj
 
     def send_all(self, msg):
