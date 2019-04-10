@@ -1,4 +1,3 @@
-import json
 import threading
 from time import sleep
 
@@ -21,14 +20,21 @@ class UltrasonicSensor(threading.Thread):
 
     def run(self):
         while self.running:
-            self.history = self.history[-(self.history_size - 1):] + [self.sensor.distance * 100]
+            self.history = self.history[-(self.history_size - 1):] + [self.sensor.distance]
 
             sleep(0.1)
 
     def data(self):
         if not self.history:
-            return 0
-        return round(sum(self.history) / len(self.history), 2)
+            return {
+                'value': 0,
+                'distance': 0
+            }
+        val = round(sum(self.history) / len(self.history), 2)
+        return {
+            'value': val,
+            'distance': val * 100
+        }
 
     def emit(self):
         return {
