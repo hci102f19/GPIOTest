@@ -8,3 +8,7 @@ server = Server("0.0.0.0", 20001)
 server.message_loop.emits(us)
 
 server.start()
+
+while True:
+    text = input()
+    print(text)
