@@ -13,6 +13,7 @@ while True:
     text = input()
 
     if text == "stop":
+        us.stop()
         server.stop()
     if text == "list":
         for idx, c in enumerate(server.clients):
