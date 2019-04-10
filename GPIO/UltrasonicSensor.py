@@ -31,10 +31,10 @@ class UltrasonicSensor(threading.Thread):
         return round(sum(self.history) / len(self.history), 2)
 
     def emit(self):
-        return json.dumps({
+        return {
             "place": self.place,
             "value": self.data()
-        })
+        }
 
     def stop(self):
         self.running = False

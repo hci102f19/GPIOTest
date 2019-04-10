@@ -2,6 +2,7 @@ import json
 import threading
 from time import sleep
 
+from GPIO.DummySensor import DummySensor
 from .UltrasonicSensor import UltrasonicSensor
 
 
@@ -10,22 +11,22 @@ class Sensors(threading.Thread):
         super().__init__()
 
         self.sensors = [
-            #UltrasonicSensor("Front", 0, 2),
-            #UltrasonicSensor("Right", 3, 4),
-            #UltrasonicSensor("Back", 5, 6),
-            #UltrasonicSensor("Left", 25, 27),
-            UltrasonicSensor("Front", 17, 4)
+            UltrasonicSensor("Front", 17, 4),
+            DummySensor("Right", 17, 4),
+            DummySensor("Back", 17, 4),
+            DummySensor("Left", 17, 4)
         ]
+
         for sensor in self.sensors:
             sensor.start()
 
         self.running = True
 
-        self.values = []
+        self.values = {}
 
     def run(self):
         while self.running:
-            self.values = [sensor.data() for sensor in self.sensors]
+            self.values = {sensor.place: sensor.data() for sensor in self.sensors}
             sleep(0.1)
 
     def emit(self):
