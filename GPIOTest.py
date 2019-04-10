@@ -1,9 +1,6 @@
 from GPIO.Sensors import Sensors
 from Server import Server
 
-# us = UltrasonicSensor("TEST", 17, 4)
-# us.start()
-
 us = Sensors()
 us.start()
 

@@ -21,11 +21,11 @@ class Sensors(threading.Thread):
 
         self.running = True
 
-        self.values = {}
+        self.values = []
 
     def run(self):
         while self.running:
-            self.values = {sensor.place: sensor.data() for sensor in self.sensors}
+            self.values = [sensor.data() for sensor in self.sensors]
             sleep(0.1)
 
     def emit(self):
