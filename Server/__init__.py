@@ -40,8 +40,8 @@ class Server(threading.Thread):
                 if address not in self.clients:
                     ip, port = address
                     print("Client connected from: {}:{}".format(ip, port))
-                    self.clients.append(address)
                     self.message_loop.send(self.HELOMessage, address)
+                    self.clients.append(address)
             else:
                 self.message_loop.send('InvalidHELOMessage', address)
 
