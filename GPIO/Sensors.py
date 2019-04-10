@@ -10,10 +10,11 @@ class Sensors(threading.Thread):
         super().__init__()
 
         self.sensors = [
-            UltrasonicSensor("Front", 0, 2),
-            UltrasonicSensor("Right", 3, 4),
-            UltrasonicSensor("Back", 5, 6),
-            UltrasonicSensor("Left", 25, 27)
+            #UltrasonicSensor("Front", 0, 2),
+            #UltrasonicSensor("Right", 3, 4),
+            #UltrasonicSensor("Back", 5, 6),
+            #UltrasonicSensor("Left", 25, 27),
+            UltrasonicSensor("Front", 17, 4)
         ]
         for sensor in self.sensors:
             sensor.start()
