@@ -7,8 +7,8 @@ class DummySensor(object):
 
     def data(self):
         return {
-            'value': 0,
-            'distance': 0
+            'value': -1,
+            'distance': -1
         }
 
     def stop(self):
