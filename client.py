@@ -3,7 +3,7 @@ import socket
 
 bytesToSend = "HELO".encode('utf-8')
 
-serverAddressPort = ("192.168.1.102", 20001)
+serverAddressPort = ("192.168.1.101", 20002)
 # serverAddressPort = ("127.0.0.1", 20001)
 
 bufferSize = 4096

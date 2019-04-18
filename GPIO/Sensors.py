@@ -11,11 +11,11 @@ class Sensors(threading.Thread):
         super().__init__()
 
         self.sensors = [
-            UltrasonicSensor("Front", 17, 27),
+            UltrasonicSensor("Front", 24, 25),
             UltrasonicSensor("Right", 22, 23),
             # DummySensor("Right", 17, 4),
             DummySensor("Back", 17, 4),
-            UltrasonicSensor("Left", 24, 25)
+            UltrasonicSensor("Left", 17, 27)
             # DummySensor("Left", 17, 4)
         ]
 
