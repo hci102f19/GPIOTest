@@ -13,10 +13,8 @@ class Sensors(threading.Thread):
         self.sensors = [
             UltrasonicSensor("Front", 24, 25),
             UltrasonicSensor("Right", 22, 23),
-            # DummySensor("Right", 17, 4),
             DummySensor("Back", 17, 4),
             UltrasonicSensor("Left", 17, 27)
-            # DummySensor("Left", 17, 4)
         ]
 
         for sensor in self.sensors:
