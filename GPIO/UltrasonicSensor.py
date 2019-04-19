@@ -20,7 +20,10 @@ class UltrasonicSensor(threading.Thread):
 
     def run(self):
         while self.running:
-            self.history = self.history[-(self.history_size - 1):] + [self.sensor.distance]
+            distance = self.sensor.distance
+
+            if distance < 1000:
+                self.history = self.history[-(self.history_size - 1):] + [distance]
 
             sleep(0.1)
 
