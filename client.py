@@ -1,4 +1,3 @@
-import json
 import socket
 
 bytesToSend = "HELO".encode('utf-8')
@@ -17,5 +16,5 @@ UDPClientSocket.sendto(bytesToSend, serverAddressPort)
 while True:
     message, _ = UDPClientSocket.recvfrom(bufferSize)
 
-    data = json.loads(message.decode('utf-8'))
+    data = message.decode('utf-8')
     print(data)
