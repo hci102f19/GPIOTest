@@ -1,2 +1,4 @@
 RPi.GPIO
 gpiozero
+zeroconf
+netifaces
