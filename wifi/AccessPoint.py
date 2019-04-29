@@ -1,3 +1,4 @@
+import math
 import re
 
 
@@ -25,7 +26,12 @@ class AccessPoint(object):
         self.quality = round((int(quality.group(1)) / int(quality.group(2))) * 100, 2)
 
     def get_distance(self, rssi):
-        return round(pow(10, (self.tx_power - rssi) / (10 * 2)), 2)
+        ratio = rssi * 1.0 / self.tx_power
+        if ratio < 1.0:
+            return math.pow(ratio, 10)
+        return 0.89976 * math.pow(ratio, 7.7095) + 0.111
+
+        # return round(pow(10, (self.tx_power - rssi) / (10 * 2)), 2)
 
     def emit(self):
         return {
