@@ -31,7 +31,7 @@ class AccessPoint(object):
 
     def get_distance(self):
         exp = (27.55 - (20 * math.log10(self.frequency)) + abs(int(self.signal))) / 20.0
-        return math.pow(10.0, exp)
+        return round(math.pow(10.0, exp), 2)
 
     def get_distance2(self):
         return round(pow(10, (self.tx_power - int(self.signal)) / (10 * 2)), 2)
