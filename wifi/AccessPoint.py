@@ -29,17 +29,12 @@ class AccessPoint(object):
 
         self.frequency = int(round(float(frequency.group(1)) * 1000, 0))
 
-    def get_distance(self, rssi):
-        print("RSSI: {}, Frequency: {}".format(rssi, self.frequency))
-        exp = (27.55 - (20 * math.log10(self.frequency)) + abs(rssi)) / 20.0
+    def get_distance(self):
+        exp = (27.55 - (20 * math.log10(self.frequency)) + abs(int(self.signal))) / 20.0
         return math.pow(10.0, exp)
 
-        # ratio = rssi * 1.0 / self.tx_power
-        # if ratio < 1.0:
-        #     return math.pow(ratio, 10)
-        # return 0.89976 * math.pow(ratio, 7.7095) + 0.111
-
-        # return round(pow(10, (self.tx_power - rssi) / (10 * 2)), 2)
+    def get_distance2(self):
+        return round(pow(10, (self.tx_power - int(self.signal)) / (10 * 2)), 2)
 
     def emit(self):
         return {
@@ -47,5 +42,6 @@ class AccessPoint(object):
             'mac': self.mac,
             'signal': self.signal,
             'quality': self.quality,
-            'distance': self.get_distance(int(self.signal))
+            'distance': self.get_distance(),
+            'distance2': self.get_distance2(),
         }
