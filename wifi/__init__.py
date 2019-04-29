@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import threading
 from time import sleep
@@ -21,6 +22,8 @@ class WiFi(threading.Thread):
         self.networks = []
 
         self.network = None if ssid is None else Network(essid=ssid)
+
+        self.tx_power = self.get_tx_power()
 
     def run(self):
         while self.is_running:
@@ -51,14 +54,17 @@ class WiFi(threading.Thread):
             self.parse_network(cur_package)
 
     def parse_network(self, cur_package):
-        access_point = AccessPoint(cur_package)
+        access_point = AccessPoint(cur_package, tx_power=self.tx_power)
+
         if self.ssid is None:
             for network in self.networks:
                 if network.ssid() == access_point.essid:
                     network.add_access_point(access_point)
                     return
+
             self.networks.append(Network(accesspoint=access_point))
             return
+
         elif self.ssid == access_point.essid:
             self.network.add_access_point(access_point)
 
@@ -66,3 +72,13 @@ class WiFi(threading.Thread):
         if self.ssid is None:
             return json.dumps([n.emit() for n in self.networks])
         return json.dumps(self.network.emit())
+
+    def get_tx_power(self):
+        cmd = "iwconfig {} | egrep 'Tx-Power='".format(self.device)
+        output = subprocess.getoutput(cmd)
+
+        re_tx_power = re.compile(r'Tx-Power=(\d+) dBm')
+
+        tx_power = re_tx_power.search(output).group(1)
+
+        return -int(tx_power)
