@@ -40,7 +40,7 @@ class AccessPoint(object):
         ratio = int(self.signal) * 1.0 / self.tx_power
         if ratio < 1.0:
             return math.pow(ratio, 10)
-        return 0.89976 * math.pow(ratio, 7.7095) + 0.111
+        return round(0.89976 * math.pow(ratio, 7.7095) + 0.111, 2)
 
     def emit(self):
         return {
