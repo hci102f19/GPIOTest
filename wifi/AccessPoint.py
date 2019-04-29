@@ -30,6 +30,7 @@ class AccessPoint(object):
         self.frequency = float(frequency.group(1))
 
     def get_distance(self, rssi):
+        print("RSSI: {}, Frequency: {}".format(rssi, self.frequency))
         exp = (27.55 - (20 * math.log10(self.frequency)) + abs(rssi)) / 20.0
         return math.pow(10.0, exp)
 
