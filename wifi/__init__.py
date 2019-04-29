@@ -15,7 +15,7 @@ class WiFi(threading.Thread):
         self.ssid = ssid
 
         self.device = device
-        self.cmd = "sudo iwlist {} scanning | egrep 'Cell |Encryption|Quality|Last beacon|ESSID'".format(device)
+        self.cmd = "sudo iwlist {} scanning | egrep 'Cell |Frequency|Quality|ESSID'".format(device)
 
         self.is_running = True
 
