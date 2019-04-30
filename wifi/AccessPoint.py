@@ -36,12 +36,6 @@ class AccessPoint(object):
     def get_distance2(self):
         return round(pow(10, (self.tx_power - int(self.signal)) / (10 * 2)), 2)
 
-    def get_distance3(self):
-        ratio = int(self.signal) * 1.0 / self.tx_power
-        if ratio < 1.0:
-            return math.pow(ratio, 10)
-        return round(0.89976 * math.pow(ratio, 7.7095) + 0.111, 2)
-
     def emit(self):
         return {
             'essid': self.essid,
@@ -50,5 +44,4 @@ class AccessPoint(object):
             'quality': self.quality,
             'distance': self.get_distance(),
             'distance2': self.get_distance2(),
-            'distance3': self.get_distance3(),
         }
