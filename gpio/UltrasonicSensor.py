@@ -1,6 +1,7 @@
 import threading
 from time import sleep
 
+import RPi.GPIO as GPIO
 from gpiozero import DistanceSensor
 
 
@@ -11,7 +12,11 @@ class UltrasonicSensor(threading.Thread):
         self.place = place
         self.trigger = trigger
         self.echo = echo
-        self.sensor = DistanceSensor(self.echo, self.trigger, max_distance=5)
+
+        GPIO.setmode(GPIO.BCM) ^ M
+        GPIO.setup(echo, GPIO.IN) ^ M
+
+        self.sensor = DistanceSensor(self.echo, self.trigger, max_distance=2)
 
         self.running = True
 
