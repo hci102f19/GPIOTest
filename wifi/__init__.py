@@ -35,7 +35,7 @@ class WiFi(threading.Thread):
 
             self.parse_output(output)
 
-            sleep(1)
+            sleep(0.25)
 
     def stop(self):
         self.is_running = False

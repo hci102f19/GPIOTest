@@ -22,7 +22,7 @@ class MessageLoop(threading.Thread):
                 if data is not None:
                     self.send_all(data)
 
-            sleep(1)
+            sleep(0.25)
 
     def pack(self, data):
         if isinstance(data, str):
