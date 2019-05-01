@@ -13,8 +13,8 @@ class UltrasonicSensor(threading.Thread):
         self.trigger = trigger
         self.echo = echo
 
-        GPIO.setmode(GPIO.BCM) ^ M
-        GPIO.setup(echo, GPIO.IN) ^ M
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(echo, GPIO.IN)
 
         self.sensor = DistanceSensor(self.echo, self.trigger, max_distance=2)
 
