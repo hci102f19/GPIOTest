@@ -42,6 +42,7 @@ class AccessPoint(object):
             'mac': self.mac,
             'signal': self.signal,
             'quality': self.quality,
+            'frequency': self.frequency,
             'distance': self.get_distance(),
             'distance2': self.get_distance2(),
         }

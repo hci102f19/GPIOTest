@@ -1,7 +1,6 @@
 import threading
 from time import sleep
 
-import RPi.GPIO as GPIO
 from gpiozero import DistanceSensor
 
 
